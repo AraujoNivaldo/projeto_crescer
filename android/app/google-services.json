@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "812379505068",
+    "firebase_url": "https://projeto-crescer-pdm-default-rtdb.firebaseio.com",
+    "project_id": "projeto-crescer-pdm",
+    "storage_bucket": "projeto-crescer-pdm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812379505068:android:14aa2af01dcdccfb853a09",
+        "android_client_info": {
+          "package_name": "com.example.tela1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "812379505068-kd7ank75r964581k0181m8drv381p94o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3Pv5ixP8Co_SLtmJP57cuK5zP54iYI2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "812379505068-kd7ank75r964581k0181m8drv381p94o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
