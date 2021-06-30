@@ -47,11 +47,6 @@ class _telaGrafico extends State<telaGrafico> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                "GRAFICO \n " + crianca.childName + " \n $medida",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
-              ),
               SfCartesianChart(
                 series: <ChartSeries>[
                   SplineSeries<GraphData, double>(

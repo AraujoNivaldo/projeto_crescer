@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tela1/telaEditMedidas.dart';
 import 'package:tela1/telaLogin.dart';
 import 'package:tela1/telaPrincipal.dart';
 import 'package:tela1/env.dart';
@@ -112,6 +111,9 @@ class _telaAddCrianca extends State<telaAddCrianca> {
                       initialDate: DateTime.now(),
                       firstDate: DateTime(2000),
                       lastDate: DateTime(2100));
+                  if(date == null){
+                    date = DateTime.now();
+                  }
                   childBirth.text = date.toString().substring(0, 10);
                 },
               ),
@@ -137,17 +139,17 @@ class _telaAddCrianca extends State<telaAddCrianca> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   RaisedButton(
-                      color: Colors.green,
-                      textColor: Colors.white,
-                      onPressed: addChild,
-                      child: Text('Adicionar')),
-                  RaisedButton(
                       color: Colors.red,
                       textColor: Colors.white,
                       onPressed: () {
                         Navigator.pop(context);
                       },
                       child: Text('Cancelar')),
+                  RaisedButton(
+                      color: Colors.green,
+                      textColor: Colors.white,
+                      onPressed: addChild,
+                      child: Text('Adicionar')),
                 ],
               ),
             ],
