@@ -28,7 +28,7 @@ class _telaPrincipal extends State<telaPrincipal> {
         leading: Icon(
           icon,
           size: 50,
-          color: Colors.blue[500],
+          color:(crianca.gender.compareTo("M") == 0)? Colors.blue[500] : Colors.pink[500],
         ),
         onTap: () {
                     Navigator.push(
@@ -78,6 +78,7 @@ class _telaPrincipal extends State<telaPrincipal> {
                   String childBirth;
                   bool isPrematuro;
                   bool isSDD;
+                  String gender;
                   snapshot.data.docs.forEach((element) { 
                     childId = element.id;
                     userId = element.get('userId');
@@ -85,6 +86,7 @@ class _telaPrincipal extends State<telaPrincipal> {
                     childBirth = element.get('childBirth');
                     isPrematuro = element.get('isPrematuro');
                     isSDD = element.get('isSDD');
+                    gender = element.get('gender');
 
                     Child crianca = new Child(
                         id: childId,
@@ -92,7 +94,8 @@ class _telaPrincipal extends State<telaPrincipal> {
                         childName: childName,
                         childBirth: childBirth,
                         isPrematuro: isPrematuro,
-                        isSDD: isSDD);
+                        isSDD: isSDD,
+                        gender: gender);
                     newList.add(crianca);
                           });
                           newList.sort((a, b) {

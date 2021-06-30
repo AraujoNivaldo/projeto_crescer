@@ -30,7 +30,8 @@ class _telaAddCrianca extends State<telaAddCrianca> {
           'childName': childName.text,
           'childBirth': childBirth.text,
           'isPrematuro': isChecked,
-          'isSDD': isChecked2
+          'isSDD': isChecked2,
+          'gender': grupo
         })
         .then((value) => {
               Fluttertoast.showToast(
@@ -63,8 +64,10 @@ class _telaAddCrianca extends State<telaAddCrianca> {
     super.dispose();
   }
 
+    String grupo = "F";
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text(Env.loggedUser.name + " - Adicionar Criança"),
@@ -75,11 +78,6 @@ class _telaAddCrianca extends State<telaAddCrianca> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'ADICIONAR \n CRIANÇA/PACIENTE',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
-              ),
               Text(
                 '\nNome\n',
                 textAlign: TextAlign.center,
@@ -115,6 +113,26 @@ class _telaAddCrianca extends State<telaAddCrianca> {
                     date = DateTime.now();
                   }
                   childBirth.text = date.toString().substring(0, 10);
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Feminino'),
+                value: 'F',
+                groupValue: grupo,
+                onChanged: (String value) {
+                  setState(() {
+                    grupo = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Masculino'),
+                value: 'M',
+                groupValue: grupo,
+                onChanged: (String value) {
+                  setState(() {
+                    grupo = value;
+                  });
                 },
               ),
               CheckboxListTile(

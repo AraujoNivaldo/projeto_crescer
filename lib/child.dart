@@ -5,6 +5,7 @@ class Child {
   final String childBirth;
   final bool isPrematuro;
   final bool isSDD;
+  final String gender;
 
   Child(
       {this.id,
@@ -12,5 +13,6 @@ class Child {
       this.childName,
       this.childBirth,
       this.isPrematuro,
-      this.isSDD});
+      this.isSDD,
+      this.gender});
 }
