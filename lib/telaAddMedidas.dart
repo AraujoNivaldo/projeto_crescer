@@ -15,8 +15,7 @@ class telaAddMedidas extends StatefulWidget {
 }
 
 class _telaAddMedidas extends State<telaAddMedidas> {
-
-CollectionReference medidas =
+  CollectionReference medidas =
       FirebaseFirestore.instance.collection('measures');
 
   TextEditingController childMedidaDate = new TextEditingController();
@@ -30,29 +29,31 @@ CollectionReference medidas =
   }
 
   int daysBetween(DateTime from, DateTime to) {
-     from = DateTime(from.year, from.month, from.day);
-     to = DateTime(to.year, to.month, to.day);
-   return (to.difference(from).inHours / 24).round();
+    from = DateTime(from.year, from.month, from.day);
+    to = DateTime(to.year, to.month, to.day);
+    return (to.difference(from).inHours / 24).round();
   }
 
-  int weekBetween(DateTime from, DateTime to){
-    final retorno = daysBetween(from, to)/7;
+  int weekBetween(DateTime from, DateTime to) {
+    final retorno = daysBetween(from, to) / 7;
     return retorno.round();
   }
 
-  int monthBetween(DateTime from, DateTime to){
-    final retorno = daysBetween(from, to)/30;
+  int monthBetween(DateTime from, DateTime to) {
+    final retorno = daysBetween(from, to) / 30;
     return retorno.round();
   }
 
   Future<void> addMeasure() {
-
-    double imc = double.parse(childPeso.text)/(double.parse(childAltura.text)*double.parse(childAltura.text));
+    double imc = double.parse(childPeso.text) /
+        (double.parse(childAltura.text) * double.parse(childAltura.text));
     imc = double.parse((imc).toStringAsFixed(2));
     List<String> dataNascimento = crianca.childBirth.split('-');
-    DateTime birthday = new DateTime(int.parse(dataNascimento[0]), int.parse(dataNascimento[1]), int.parse(dataNascimento[2]));    
+    DateTime birthday = new DateTime(int.parse(dataNascimento[0]),
+        int.parse(dataNascimento[1]), int.parse(dataNascimento[2]));
     List<String> dataMedida = childMedidaDate.text.split('-');
-    DateTime date2 = new DateTime(int.parse(dataMedida[0]), int.parse(dataMedida[1]), int.parse(dataMedida[2]));
+    DateTime date2 = new DateTime(int.parse(dataMedida[0]),
+        int.parse(dataMedida[1]), int.parse(dataMedida[2]));
 
     return medidas
         .add({
@@ -73,9 +74,7 @@ CollectionReference medidas =
                   timeInSecForIos: 1,
                   backgroundColor: Colors.lightBlueAccent,
                   textColor: Colors.white),
-              Navigator.pop(
-                context
-              )
+              Navigator.pop(context)
             })
         .catchError((error) => {
               print("Failed to add user: $error"),
@@ -89,11 +88,11 @@ CollectionReference medidas =
             });
   }
 
-@override
-dispose(){
-  childMedidaDate.dispose();
-  super.dispose();
-}
+  @override
+  dispose() {
+    childMedidaDate.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,8 +124,11 @@ dispose(){
                   var date = await showDatePicker(
                       context: context,
                       initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
+                      firstDate: DateTime(2015),
                       lastDate: DateTime(2100));
+                  if (date == null) {
+                    date = DateTime.now();
+                  }
                   childMedidaDate.text = date.toString().substring(0, 10);
                 },
               ),
@@ -138,7 +140,8 @@ dispose(){
               TextField(
                 keyboardType: TextInputType.number,
                 inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r"^\d?\d?\.?\d{0,2}"))
+                  FilteringTextInputFormatter.allow(
+                      RegExp(r"^\d?\d?\.?\d{0,2}"))
                 ],
                 controller: childPeso,
                 textAlign: TextAlign.left,
@@ -188,8 +191,7 @@ dispose(){
                       color: Colors.red,
                       textColor: Colors.white,
                       onPressed: () {
-                        Navigator.pop(
-                          context);
+                        Navigator.pop(context);
                       },
                       child: Text('Cancelar')),
                   RaisedButton(
