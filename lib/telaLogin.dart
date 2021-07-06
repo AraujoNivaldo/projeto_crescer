@@ -5,11 +5,8 @@ import "package:tela1/user.dart";
 import 'package:tela1/env.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-<<<<<<< HEAD
 //teste papae2
-=======
 //surpresa, eu VOTEI DNV
->>>>>>> 5593cc9bb55c111c92ff7511f43bf41d155b5924
 
 class telaLogin extends StatefulWidget {
   telaLogin({Key key, this.title}) : super(key: key);
