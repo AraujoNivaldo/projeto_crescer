@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tela1/telaCadastro.dart';
 import 'package:tela1/telaPrincipal.dart';
-import 'package:tela1/telaRecupera.dart';
-import 'package:http/http.dart' as http;
 import "package:tela1/user.dart";
 import 'package:tela1/env.dart';
-import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tela1/child.dart';
 
 class telaLogin extends StatefulWidget {
   telaLogin({Key key, this.title}) : super(key: key);
