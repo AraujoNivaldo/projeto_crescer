@@ -71,6 +71,37 @@ class _telaLogin extends State<telaLogin> {
             });
   }
 
+  /*fixNames() {
+    CollectionReference update_premature =
+        FirebaseFirestore.instance.collection('curves-premature');
+
+    update_premature
+        .where('param', isNotEqualTo: ["'CE'", "'HC'", "'PE'"])
+        .get()
+        .then((value) => value.docs.forEach((element) {
+              String substitute = element.get('param');
+              if (element.get('param') == "'CEâ€™") {
+                substitute = "'CE'";
+              }
+              if (element.get('param') == "â€˜PE'") {
+                substitute = "'PE'";
+              }
+
+              update_premature.doc(element.id).set({
+                'age': element.get('age'),
+                'gender': element.get('gender'),
+                'param': substitute,
+                'z0': element.get('z0'),
+                'z1': element.get('z1'),
+                'z2': element.get('z2'),
+                'z3': element.get('z3'),
+                'zm1': element.get('zm1'),
+                'zm2': element.get('zm2'),
+                'zm3': element.get('zm3'),
+              });
+            }));
+  }*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,17 +168,14 @@ class _telaLogin extends State<telaLogin> {
                       },
                       child: Text('Cadastrar-se')),
                 ],
-              ),
+              ) /*,
               RaisedButton(
                   color: Colors.blueAccent,
                   textColor: Colors.white,
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => telaPrincipal()),
-                    );
+                    fixNames();
                   },
-                  child: Text('Esqueci Minha Senha'))
+                  child: Text('Esqueci Minha Senha'))*/
             ],
           ),
         ),

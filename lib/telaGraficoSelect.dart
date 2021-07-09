@@ -22,6 +22,90 @@ class _telaGraficoSelect extends State<telaGraficoSelect> {
 
   @override
   Widget build(BuildContext context) {
+    var buttons = new List<RaisedButton>();
+    buttons.add(RaisedButton(
+        color: Colors.white,
+        textColor: Colors.black,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => telaGrafico(crianca, "Altura")),
+          );
+        },
+        child: Text('Altura')));
+    buttons.add(RaisedButton(
+        color: Colors.white,
+        textColor: Colors.black,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => telaGrafico(crianca, "Peso")),
+          );
+        },
+        child: Text('Peso')));
+    if (!crianca.isSDD)
+      buttons.add(RaisedButton(
+          color: Colors.white,
+          textColor: Colors.black,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => telaGrafico(crianca, "IMC")),
+            );
+          },
+          child: Text('IMC')));
+    buttons.add(RaisedButton(
+        color: Colors.white,
+        textColor: Colors.black,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => telaGrafico(crianca, "HC")),
+          );
+        },
+        child: Text('Perimetro Cefalico')));
+
+    if (crianca.isPrematuro) {
+      buttons.add(RaisedButton(
+          color: Colors.white,
+          textColor: Colors.black,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => telaGrafico(crianca, "Altura",
+                      isPrematuro: crianca.isPrematuro)),
+            );
+          },
+          child: Text('Altura - Prematuro')));
+      buttons.add(RaisedButton(
+          color: Colors.white,
+          textColor: Colors.black,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => telaGrafico(crianca, "Peso",
+                      isPrematuro: crianca.isPrematuro)),
+            );
+          },
+          child: Text('Peso - Prematuro')));
+      buttons.add(RaisedButton(
+          color: Colors.white,
+          textColor: Colors.black,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => telaGrafico(crianca, "HC",
+                      isPrematuro: crianca.isPrematuro)),
+            );
+          },
+          child: Text('Perimetro Cefalico - Prematuro')));
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text("Graficos - " + crianca.childName),
@@ -38,67 +122,7 @@ class _telaGraficoSelect extends State<telaGraficoSelect> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
               ),
               Column(
-                children: [
-                  RaisedButton(
-                      color: Colors.white,
-                      textColor: Colors.black,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  telaGrafico(crianca, "Altura")),
-                        );
-                      },
-                      child: Text('ALTURA')),
-                  RaisedButton(
-                      color: Colors.white,
-                      textColor: Colors.black,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  telaGrafico(crianca, "Peso")),
-                        );
-                      },
-                      child: Text('PESO')),
-                  RaisedButton(
-                      color: Colors.white,
-                      textColor: Colors.black,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  telaGrafico(crianca, "IMC")),
-                        );
-                      },
-                      child: Text('IMC')),
-                  RaisedButton(
-                      color: Colors.white,
-                      textColor: Colors.black,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  telaGrafico(crianca, "Perimetro Cefalico")),
-                        );
-                      },
-                      child: Text('PERIMETRO CEFALICO')),
-                  RaisedButton(
-                      color: Colors.red,
-                      textColor: Colors.white,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => telaPrincipal()),
-                        );
-                      },
-                      child: Text('Voltar')),
-                ],
+                children: buttons,
               ),
             ],
           ),
