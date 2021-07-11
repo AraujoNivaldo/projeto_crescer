@@ -40,15 +40,13 @@ class _telaCadastro extends State<telaCadastro> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'CADASTRO',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
-              ),
-              Text(
-                'Nome',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Image.asset(
+                  'assets/Logo.png',
+                  height: 200,
+                  width: 200,
+                ),
               ),
               TextField(
                 keyboardType: TextInputType.emailAddress,
@@ -56,13 +54,13 @@ class _telaCadastro extends State<telaCadastro> {
                 obscureText: false,
                 textAlign: TextAlign.left,
                 decoration: InputDecoration(
-                  border: InputBorder.none,
+                  border: OutlineInputBorder(),
                   hintText: 'Nome',
                   hintStyle: TextStyle(color: Colors.grey),
                 ),
               ),
               Text(
-                'Email',
+                '',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
@@ -72,13 +70,13 @@ class _telaCadastro extends State<telaCadastro> {
                 obscureText: false,
                 textAlign: TextAlign.left,
                 decoration: InputDecoration(
-                  border: InputBorder.none,
+                  border: OutlineInputBorder(),
                   hintText: 'Email',
                   hintStyle: TextStyle(color: Colors.grey),
                 ),
               ),
               Text(
-                'Senha',
+                '',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
@@ -88,13 +86,13 @@ class _telaCadastro extends State<telaCadastro> {
                 obscureText: true,
                 textAlign: TextAlign.left,
                 decoration: InputDecoration(
-                  border: InputBorder.none,
+                  border: OutlineInputBorder(),
                   hintText: 'Senha',
                   hintStyle: TextStyle(color: Colors.grey),
                 ),
               ),
               Text(
-                'Confirmar Senha',
+                '',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
@@ -103,10 +101,15 @@ class _telaCadastro extends State<telaCadastro> {
                 obscureText: true,
                 textAlign: TextAlign.left,
                 decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Senha',
+                  border: OutlineInputBorder(),
+                  hintText: 'Confirmar Senha',
                   hintStyle: TextStyle(color: Colors.grey),
                 ),
+              ),
+              Text(
+                '',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

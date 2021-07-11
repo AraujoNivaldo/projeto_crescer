@@ -167,7 +167,7 @@ class _telaEditCrianca extends State<telaEditCrianca> {
                     controller: childName,
                     textAlign: TextAlign.left,
                     decoration: InputDecoration(
-                      border: InputBorder.none,
+                      border: OutlineInputBorder(),
                       hintText: 'Nome',
                       hintStyle: TextStyle(color: Colors.grey),
                     ),
@@ -180,7 +180,9 @@ class _telaEditCrianca extends State<telaEditCrianca> {
                   TextField(
                     readOnly: true,
                     controller: childBirth,
-                    decoration: InputDecoration(hintText: 'Escolha a Data'),
+                    decoration: InputDecoration(
+                        hintText: 'Escolha a Data',
+                        border: OutlineInputBorder()),
                     onTap: () async {
                       var date = await showDatePicker(
                           context: context,

@@ -115,7 +115,9 @@ class _telaAddMedidas extends State<telaAddMedidas> {
                   TextField(
                     readOnly: true,
                     controller: childMedidaDate,
-                    decoration: InputDecoration(hintText: 'Escolha a Data'),
+                    decoration: InputDecoration(
+                        hintText: 'Escolha a Data',
+                        border: OutlineInputBorder()),
                     onTap: () async {
                       var date = await showDatePicker(
                           context: context,
