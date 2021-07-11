@@ -33,8 +33,8 @@ class _telaCadastro extends State<telaCadastro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
+        body: Center(
+      child: SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Center(
           child: Column(
@@ -129,6 +129,6 @@ class _telaCadastro extends State<telaCadastro> {
           ),
         ),
       ),
-    );
+    ));
   }
 }

@@ -33,10 +33,12 @@ class _telaEditCadastro extends State<telaEditCadastro> {
         .where('userId', isEqualTo: Env.loggedUser.id)
         .get()
         .then((value) => value.docs.forEach((element) {
-              measures.where("childId", isEqualTo: element.id)
-                ..get().then((value2) => value2.docs.forEach((element2) {
-                      measures.doc(element2.id).delete();
-                    }));
+              measures
+                  .where("childId", isEqualTo: element.id)
+                  .get()
+                  .then((value2) => value2.docs.forEach((element2) {
+                        measures.doc(element2.id).delete();
+                      }));
               childs.doc(element.id).delete();
             }));
     users.doc(Env.loggedUser.id).delete();
@@ -70,7 +72,7 @@ class _telaEditCadastro extends State<telaEditCadastro> {
       },
     ); // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Deseja mesmo excluir esta conta?"),
+      title: Text("Deseja mesmo excluir esta crianca?"),
       content: Text("Esta ação é irreversivel"),
       actions: [
         cancelButton,
@@ -131,95 +133,95 @@ class _telaEditCadastro extends State<telaEditCadastro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text("Editar Usuario: " + Env.loggedUser.name),
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: GestureDetector(
-                onTap: () {
-                  showAlertDialog(context);
-                },
-                child: Icon(Icons.delete)),
-          ),
-        ],
-      ),
-      body: Container(
-        padding: EdgeInsets.all(20),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Nome',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
-              TextField(
-                keyboardType: TextInputType.emailAddress,
-                controller: nameController,
-                obscureText: false,
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Nome',
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-              ),
-              Text(
-                'Email',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
-              TextField(
-                keyboardType: TextInputType.emailAddress,
-                controller: emailController,
-                obscureText: false,
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Email',
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-              ),
-              Text(
-                'Senha',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
-              TextField(
-                keyboardType: TextInputType.emailAddress,
-                controller: passController,
-                obscureText: true,
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Senha',
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  RaisedButton(
-                      color: Colors.red,
-                      textColor: Colors.white,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text('Voltar')),
-                  RaisedButton(
-                      color: Colors.green,
-                      textColor: Colors.white,
-                      onPressed: addUser,
-                      child: Text('Editar'))
-                ],
-              )
-            ],
-          ),
+        appBar: AppBar(
+          title: Text("Editar Usuario: " + Env.loggedUser.name),
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                  onTap: () {
+                    showAlertDialog(context);
+                  },
+                  child: Icon(Icons.delete)),
+            ),
+          ],
         ),
-      ),
-    );
+        body: Center(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(20),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Nome',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  ),
+                  TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: nameController,
+                    obscureText: false,
+                    textAlign: TextAlign.left,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Nome',
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  Text(
+                    'Email',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  ),
+                  TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: emailController,
+                    obscureText: false,
+                    textAlign: TextAlign.left,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Email',
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  Text(
+                    'Senha',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  ),
+                  TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: passController,
+                    obscureText: true,
+                    textAlign: TextAlign.left,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Senha',
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RaisedButton(
+                          color: Colors.red,
+                          textColor: Colors.white,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('Voltar')),
+                      RaisedButton(
+                          color: Colors.green,
+                          textColor: Colors.white,
+                          onPressed: addUser,
+                          child: Text('Editar'))
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 }

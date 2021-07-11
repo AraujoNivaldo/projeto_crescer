@@ -1,32 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:tela1/telaLogin.dart';
-import 'package:tela1/telaPrincipal.dart';
 import 'package:tela1/env.dart';
+import 'package:tela1/child.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tela1/telaPrincipal.dart';
 
-class telaAddCrianca extends StatefulWidget {
-  telaAddCrianca({Key key, this.title}) : super(key: key);
+class telaEditCrianca extends StatefulWidget {
+  telaEditCrianca(Child crianca) {
+    this.crianca = crianca;
+  }
 
-  final String title;
+  Child crianca;
 
   @override
-  _telaAddCrianca createState() => _telaAddCrianca();
+  _telaEditCrianca createState() => _telaEditCrianca(crianca);
 }
 
-class _telaAddCrianca extends State<telaAddCrianca> {
+class _telaEditCrianca extends State<telaEditCrianca> {
+  Child crianca;
   bool isChecked = false;
   bool isChecked2 = false;
   TextEditingController childName = new TextEditingController();
   TextEditingController childBirth = new TextEditingController();
+  String grupo = "F";
 
   CollectionReference criancas =
       FirebaseFirestore.instance.collection('childs');
+  _telaEditCrianca(Child crianca) {
+    this.crianca = crianca;
+    isChecked = crianca.isPrematuro;
+    isChecked2 = crianca.isSDD;
+    childName = new TextEditingController(text: crianca.childName);
+    childBirth = new TextEditingController(text: crianca.childBirth);
+    grupo = crianca.gender;
+  }
 
   Future<void> addChild() {
     return criancas
-        .add({
-          'userId': Env.loggedUser.id,
+        .doc(crianca.id)
+        .update({
           'childName': childName.text,
           'childBirth': childBirth.text,
           'isPrematuro': isChecked,
@@ -35,13 +47,15 @@ class _telaAddCrianca extends State<telaAddCrianca> {
         })
         .then((value) => {
               Fluttertoast.showToast(
-                  msg: childName.text + " registrada com Sucesso!",
+                  msg: childName.text + " Editada com sucesso",
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.BOTTOM,
                   timeInSecForIos: 1,
                   backgroundColor: Colors.lightBlueAccent,
                   textColor: Colors.white),
-              Navigator.pop(context)
+              Navigator.of(context).popUntil((route) => route.isFirst),
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => telaPrincipal()))
             })
         .catchError((error) => {
               print("Failed to add user: $error"),
@@ -55,6 +69,63 @@ class _telaAddCrianca extends State<telaAddCrianca> {
             });
   }
 
+  excluirCrianca() {
+    CollectionReference childs =
+        FirebaseFirestore.instance.collection('childs');
+    CollectionReference measures =
+        FirebaseFirestore.instance.collection('measures');
+    measures
+        .where("childId", isEqualTo: crianca.id)
+        .get()
+        .then((value2) => value2.docs.forEach((element2) {
+              measures.doc(element2.id).delete();
+            }));
+    childs.doc(crianca.id).delete();
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = FlatButton(
+      child: Text("Proceder"),
+      color: Colors.green,
+      onPressed: () {
+        excluirCrianca();
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => telaPrincipal()));
+        Fluttertoast.showToast(
+            msg: "Crianca " + crianca.childName + " Excluido(a)",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIos: 1,
+            backgroundColor: Colors.redAccent,
+            textColor: Colors.white);
+      },
+    );
+    Widget continueButton = FlatButton(
+      child: Text("Cancelar"),
+      color: Colors.grey,
+      textColor: Colors.white,
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    ); // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Deseja mesmo excluir esta conta?"),
+      content: Text("Esta ação é irreversivel"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    ); // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   void dispose() {
     // Clean up the controller when the widget is removed
@@ -62,12 +133,21 @@ class _telaAddCrianca extends State<telaAddCrianca> {
     super.dispose();
   }
 
-  String grupo = "F";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(Env.loggedUser.name + " - Adicionar Criança"),
+          title: Text("Editar Crianca - " + crianca.childName),
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                  onTap: () {
+                    showAlertDialog(context);
+                  },
+                  child: Icon(Icons.delete)),
+            ),
+          ],
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -165,7 +245,7 @@ class _telaAddCrianca extends State<telaAddCrianca> {
                           color: Colors.green,
                           textColor: Colors.white,
                           onPressed: addChild,
-                          child: Text('Adicionar')),
+                          child: Text('Editar')),
                     ],
                   ),
                 ],

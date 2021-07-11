@@ -97,115 +97,111 @@ class _telaAddMedidas extends State<telaAddMedidas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text("Adicionar Medidas - " + crianca.childName),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(20),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'ADICIONAR MEDIDAS CRIANÇA X',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
-              ),
-              Text(
-                'Data Medição',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
-              TextField(
-                readOnly: true,
-                controller: childMedidaDate,
-                decoration: InputDecoration(hintText: 'Escolha a Data'),
-                onTap: () async {
-                  var date = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2015),
-                      lastDate: DateTime(2100));
-                  if (date == null) {
-                    date = DateTime.now();
-                  }
-                  childMedidaDate.text = date.toString().substring(0, 10);
-                },
-              ),
-              Text(
-                'Peso (KG)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
-              TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(
-                      RegExp(r"^\d?\d?\.?\d{0,2}"))
-                ],
-                controller: childPeso,
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Peso (KG)',
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-              ),
-              Text(
-                'Altura (M)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
-              TextField(
-                keyboardType: TextInputType.number,
-                controller: childAltura,
-                textAlign: TextAlign.left,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r"^\d?\.?\d{0,2}"))
-                ],
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Altura (M)',
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-              ),
-              Text(
-                'Perimetro Cefalico',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
-              TextField(
-                keyboardType: TextInputType.number,
-                controller: childPerimetro,
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Perimetro Cefalico',
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  RaisedButton(
-                      color: Colors.red,
-                      textColor: Colors.white,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text('Cancelar')),
-                  RaisedButton(
-                      color: Colors.green,
-                      textColor: Colors.white,
-                      onPressed: addMeasure,
-                      child: Text('Adicionar'))
-                ],
-              )
-            ],
-          ),
+        appBar: AppBar(
+          title: Text("Adicionar Medidas - " + crianca.childName),
         ),
-      ),
-    );
+        body: Center(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(20),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Data Medição',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  ),
+                  TextField(
+                    readOnly: true,
+                    controller: childMedidaDate,
+                    decoration: InputDecoration(hintText: 'Escolha a Data'),
+                    onTap: () async {
+                      var date = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2015),
+                          lastDate: DateTime(2100));
+                      if (date == null) {
+                        date = DateTime.now();
+                      }
+                      childMedidaDate.text = date.toString().substring(0, 10);
+                    },
+                  ),
+                  Text(
+                    'Peso (KG)',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  ),
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r"^\d?\d?\.?\d{0,2}"))
+                    ],
+                    controller: childPeso,
+                    textAlign: TextAlign.left,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Peso (KG)',
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  Text(
+                    'Altura (M)',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  ),
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    controller: childAltura,
+                    textAlign: TextAlign.left,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r"^\d?\.?\d{0,2}"))
+                    ],
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Altura (M)',
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  Text(
+                    'Perimetro Cefalico',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  ),
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    controller: childPerimetro,
+                    textAlign: TextAlign.left,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Perimetro Cefalico',
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RaisedButton(
+                          color: Colors.red,
+                          textColor: Colors.white,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('Cancelar')),
+                      RaisedButton(
+                          color: Colors.green,
+                          textColor: Colors.white,
+                          onPressed: addMeasure,
+                          child: Text('Adicionar'))
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 }

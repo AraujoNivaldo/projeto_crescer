@@ -105,22 +105,20 @@ class _telaLogin extends State<telaLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
+        body: Center(
+      child: SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'LOGIN',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
-              ),
-              Text(
-                'Email',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Image.asset(
+                  'assets/Logo.png',
+                  height: 200,
+                  width: 200,
+                ),
               ),
               TextField(
                 keyboardType: TextInputType.emailAddress,
@@ -128,15 +126,15 @@ class _telaLogin extends State<telaLogin> {
                 controller: emailController,
                 textAlign: TextAlign.left,
                 decoration: InputDecoration(
-                  border: InputBorder.none,
+                  border: OutlineInputBorder(),
                   hintText: 'Email',
                   hintStyle: TextStyle(color: Colors.grey),
                 ),
               ),
               Text(
-                'Senha',
+                '',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               TextField(
                 keyboardType: TextInputType.emailAddress,
@@ -144,10 +142,15 @@ class _telaLogin extends State<telaLogin> {
                 controller: passController,
                 textAlign: TextAlign.left,
                 decoration: InputDecoration(
-                  border: InputBorder.none,
+                  border: OutlineInputBorder(),
                   hintText: 'Senha',
                   hintStyle: TextStyle(color: Colors.grey),
                 ),
+              ),
+              Text(
+                '',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -181,6 +184,6 @@ class _telaLogin extends State<telaLogin> {
           ),
         ),
       ),
-    );
+    ));
   }
 }

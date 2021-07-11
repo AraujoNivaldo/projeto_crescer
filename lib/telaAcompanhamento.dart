@@ -4,6 +4,7 @@ import 'package:tela1/telaEditMedidasData.dart';
 import 'package:tela1/telaGraficoSelect.dart';
 import 'package:tela1/child.dart';
 import 'package:tela1/measure.dart';
+import 'package:tela1/telaEditCrianca.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class telaAcompanhamento extends StatefulWidget {
@@ -69,9 +70,24 @@ class _telaAcompanhamento extends State<telaAcompanhamento> {
     CollectionReference listaMedidas =
         FirebaseFirestore.instance.collection('measures');
     return Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(crianca.childName + " - Medidas"),
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => telaEditCrianca(crianca)),
+                    ).then((value) {
+                      setState(() {});
+                    });
+                  },
+                  child: Icon(Icons.edit)),
+            ),
+          ],
         ),
         body: Container(
           padding: EdgeInsets.all(20),
