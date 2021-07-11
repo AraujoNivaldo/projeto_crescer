@@ -107,6 +107,7 @@ class _telaGraficoSelect extends State<telaGraficoSelect> {
           child: Text('Perimetro Cefalico - Prematuro')));
     }
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("Graficos - " + crianca.childName),
       ),

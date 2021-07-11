@@ -105,6 +105,7 @@ class _telaLogin extends State<telaLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         padding: EdgeInsets.all(20),
         child: Center(
@@ -160,7 +161,7 @@ class _telaLogin extends State<telaLogin> {
                       color: Colors.purple,
                       textColor: Colors.white,
                       onPressed: () {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => telaCadastro()),

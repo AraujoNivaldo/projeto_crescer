@@ -26,16 +26,14 @@ class _telaCadastro extends State<telaCadastro> {
           'email': emailController.text,
           'pass': passController.text
         })
-        .then((value) => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => telaLogin()),
-            ))
+        .then((value) => Navigator.pop(context))
         .catchError((error) => print("Failed to add user: $error"));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         padding: EdgeInsets.all(20),
         child: Center(

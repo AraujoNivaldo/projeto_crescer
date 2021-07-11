@@ -5,6 +5,8 @@ import 'package:tela1/telaAddCrianca.dart';
 import 'package:tela1/env.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tela1/telaEditCadastro.dart';
+import 'package:tela1/telaLogin.dart';
 
 class telaPrincipal extends StatefulWidget {
   telaPrincipal({Key key, this.title}) : super(key: key);
@@ -16,104 +18,112 @@ class telaPrincipal extends StatefulWidget {
 }
 
 class _telaPrincipal extends State<telaPrincipal> {
-  _telaPrincipal() {
-  }
-  ListTile _tile(String title, String subtitle, IconData icon, Child crianca) => ListTile(
-        title: Text(title,
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 20,
-            )),
-        subtitle: Text(subtitle),
-        leading: Icon(
-          icon,
-          size: 50,
-          color:(crianca.gender.compareTo("M") == 0)? Colors.blue[500] : Colors.pink[500],
-        ),
-        onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => telaAcompanhamento(
-                              crianca)),
-                    );
-                  }
-      );
-  ListView childListView(context, List<Child> data){
+  _telaPrincipal() {}
+  ListTile _tile(String title, String subtitle, IconData icon, Child crianca) =>
+      ListTile(
+          title: Text(title,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 20,
+              )),
+          subtitle: Text(subtitle),
+          leading: Icon(
+            icon,
+            size: 50,
+            color: (crianca.gender.compareTo("M") == 0)
+                ? Colors.blue[500]
+                : Colors.pink[500],
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => telaAcompanhamento(crianca)),
+            );
+          });
+  ListView childListView(context, List<Child> data) {
     return ListView.builder(
-      scrollDirection: Axis.vertical,
-    shrinkWrap: true,
-      itemCount: data.length,
-      itemBuilder: (context, index){
-       return _tile(data[index].childName, data[index].childBirth, Icons.person, data[index]);
-      });
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return _tile(data[index].childName, data[index].childBirth,
+              Icons.person, data[index]);
+        });
   }
 
   Future<List<Child>> loadChild() async {
-    
     await Env.loggedUser.loadChilds();
     return Env.loggedUser.listaCriancas;
   }
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference listaCriancas = FirebaseFirestore.instance.collection('childs');
+    CollectionReference listaCriancas =
+        FirebaseFirestore.instance.collection('childs');
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("Olá " + Env.loggedUser.name),
       ),
-      
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FutureBuilder<QuerySnapshot<Object>>(
-              future: listaCriancas.where('userId', isEqualTo: Env.loggedUser.id).get(),
-              builder: (context, snapshot){
-                if(snapshot.hasData){
-                  List<Child> newList = [];
-                  String childId;
-                  String userId;
-                  String childName;
-                  String childBirth;
-                  bool isPrematuro;
-                  bool isSDD;
-                  String gender;
-                  snapshot.data.docs.forEach((element) { 
-                    childId = element.id;
-                    userId = element.get('userId');
-                    childName = element.get('childName');
-                    childBirth = element.get('childBirth');
-                    isPrematuro = element.get('isPrematuro');
-                    isSDD = element.get('isSDD');
-                    gender = element.get('gender');
+                future: listaCriancas
+                    .where('userId', isEqualTo: Env.loggedUser.id)
+                    .get(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<Child> newList = [];
+                    String childId;
+                    String userId;
+                    String childName;
+                    String childBirth;
+                    bool isPrematuro;
+                    bool isSDD;
+                    String gender;
+                    snapshot.data.docs.forEach((element) {
+                      childId = element.id;
+                      userId = element.get('userId');
+                      childName = element.get('childName');
+                      childBirth = element.get('childBirth');
+                      isPrematuro = element.get('isPrematuro');
+                      isSDD = element.get('isSDD');
+                      gender = element.get('gender');
 
-                    Child crianca = new Child(
-                        id: childId,
-                        userId: userId,
-                        childName: childName,
-                        childBirth: childBirth,
-                        isPrematuro: isPrematuro,
-                        isSDD: isSDD,
-                        gender: gender);
-                    newList.add(crianca);
-                          });
-                          newList.sort((a, b) {
-  return a.childName.toString().toLowerCase().compareTo(b.childName.toString().toLowerCase());
-}); 
-                return childListView(context, newList);                
-                }else if(snapshot.hasError){
+                      Child crianca = new Child(
+                          id: childId,
+                          userId: userId,
+                          childName: childName,
+                          childBirth: childBirth,
+                          isPrematuro: isPrematuro,
+                          isSDD: isSDD,
+                          gender: gender);
+                      newList.add(crianca);
+                    });
+                    newList.sort((a, b) {
+                      return a.childName
+                          .toString()
+                          .toLowerCase()
+                          .compareTo(b.childName.toString().toLowerCase());
+                    });
+                    return childListView(context, newList);
+                  } else if (snapshot.hasError) {}
 
-                }
-
-                return CircularProgressIndicator();
-              }
-            )
+                  return CircularProgressIndicator();
+                })
           ],
         ),
       ),
       drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+
         child: ListView(
+          // Important: Remove any pad
           children: <Widget>[
             Container(
               height: AppBar().preferredSize.height,
@@ -124,6 +134,30 @@ class _telaPrincipal extends State<telaPrincipal> {
                   margin: EdgeInsets.all(0.0),
                   padding: EdgeInsets.all(20.0)),
             ),
+            ListTile(
+              leading: Icon(Icons.edit),
+              title: Text('Editar Perfil'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => telaEditCadastro()),
+                ).then((value) {
+                  setState(() {});
+                });
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Log Out'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => telaLogin()),
+                ).then((value) {
+                  setState(() {});
+                });
+              },
+            ),
           ],
         ),
       ),
@@ -132,7 +166,9 @@ class _telaPrincipal extends State<telaPrincipal> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => telaAddCrianca()),
-          ).then((value) { setState(() {});});
+          ).then((value) {
+            setState(() {});
+          });
         },
         child: Icon(Icons.add),
       ),

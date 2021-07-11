@@ -41,9 +41,7 @@ class _telaAddCrianca extends State<telaAddCrianca> {
                   timeInSecForIos: 1,
                   backgroundColor: Colors.lightBlueAccent,
                   textColor: Colors.white),
-              Navigator.pop(
-                context
-              )
+              Navigator.pop(context)
             })
         .catchError((error) => {
               print("Failed to add user: $error"),
@@ -64,11 +62,11 @@ class _telaAddCrianca extends State<telaAddCrianca> {
     super.dispose();
   }
 
-    String grupo = "F";
+  String grupo = "F";
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(Env.loggedUser.name + " - Adicionar Criança"),
       ),
@@ -109,7 +107,7 @@ class _telaAddCrianca extends State<telaAddCrianca> {
                       initialDate: DateTime.now(),
                       firstDate: DateTime(2000),
                       lastDate: DateTime(2100));
-                  if(date == null){
+                  if (date == null) {
                     date = DateTime.now();
                   }
                   childBirth.text = date.toString().substring(0, 10);

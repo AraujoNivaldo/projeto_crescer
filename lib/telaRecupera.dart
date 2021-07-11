@@ -14,6 +14,7 @@ class _telaRecupera extends State<telaRecupera> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         padding: EdgeInsets.all(20),
         child: Center(
