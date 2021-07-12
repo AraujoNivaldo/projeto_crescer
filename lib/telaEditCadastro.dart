@@ -153,10 +153,14 @@ class _telaEditCadastro extends State<telaEditCadastro> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'Nome',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    child: Text(
+                      'Nome:',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                   ),
                   TextField(
                     keyboardType: TextInputType.emailAddress,
@@ -164,15 +168,19 @@ class _telaEditCadastro extends State<telaEditCadastro> {
                     obscureText: false,
                     textAlign: TextAlign.left,
                     decoration: InputDecoration(
-                      border: InputBorder.none,
+                      border: OutlineInputBorder(),
                       hintText: 'Nome',
                       hintStyle: TextStyle(color: Colors.grey),
                     ),
                   ),
-                  Text(
-                    'Email',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    child: Text(
+                      'Email:',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                   ),
                   TextField(
                     keyboardType: TextInputType.emailAddress,
@@ -180,25 +188,32 @@ class _telaEditCadastro extends State<telaEditCadastro> {
                     obscureText: false,
                     textAlign: TextAlign.left,
                     decoration: InputDecoration(
-                      border: InputBorder.none,
+                      border: OutlineInputBorder(),
                       hintText: 'Email',
                       hintStyle: TextStyle(color: Colors.grey),
                     ),
                   ),
-                  Text(
-                    'Senha',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    child: Text(
+                      'Senha:',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                   ),
-                  TextField(
-                    keyboardType: TextInputType.emailAddress,
-                    controller: passController,
-                    obscureText: true,
-                    textAlign: TextAlign.left,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Senha',
-                      hintStyle: TextStyle(color: Colors.grey),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    child: TextField(
+                      keyboardType: TextInputType.emailAddress,
+                      controller: passController,
+                      obscureText: true,
+                      textAlign: TextAlign.left,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Senha',
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
                     ),
                   ),
                   Row(

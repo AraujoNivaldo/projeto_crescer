@@ -52,6 +52,7 @@ class _telaAcompanhamento extends State<telaAcompanhamento> {
     return ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         itemCount: data.length,
         itemBuilder: (context, index) {
           return _tile(
@@ -89,7 +90,8 @@ class _telaAcompanhamento extends State<telaAcompanhamento> {
             ),
           ],
         ),
-        body: Container(
+        body: Center(
+            child: SingleChildScrollView(
           padding: EdgeInsets.all(20),
           child: Center(
             child: Column(
@@ -155,7 +157,7 @@ class _telaAcompanhamento extends State<telaAcompanhamento> {
               ],
             ),
           ),
-        ),
+        )),
         floatingActionButton: Stack(
           children: <Widget>[
             Padding(

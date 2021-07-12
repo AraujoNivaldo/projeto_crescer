@@ -23,11 +23,33 @@ class _telaGrafico extends State<telaGrafico> {
   Child crianca;
   String medida = '';
   bool isPrematuro = false;
+  String titleGrafico = 'mama aqui oh glub glub';
 
   _telaGrafico(Child crianca, medida, bool isPrematuro) {
     this.crianca = crianca;
     this.medida = medida;
     this.isPrematuro = isPrematuro;
+    switch (medida) {
+      case "Altura":
+        titleGrafico = "Altura";
+        break;
+      case "Peso":
+        titleGrafico = "Peso";
+        break;
+      case "IMC":
+        titleGrafico = "IMC";
+        break;
+      case "HC":
+        titleGrafico = "Perimetro Cefálico";
+        break;
+    }
+    if (isPrematuro) {
+      titleGrafico += " - Prematuro";
+    } else {
+      if (crianca.isSDD) {
+        titleGrafico += " - Sindrome de Down";
+      }
+    }
   }
 
   List<GraphData> _chartData;
@@ -44,62 +66,76 @@ class _telaGrafico extends State<telaGrafico> {
         title: Text("Graficos - " + crianca.childName),
       ),
       body: Container(
+        height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.all(20),
         child: Center(
           child: FutureBuilder<List<GraphData>>(
               future: getGraph(crianca, medida, isPrematuro),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SfCartesianChart(
-                        series: <ChartSeries>[
-                          SplineSeries<GraphData, double>(
-                              dataSource: snapshot.data,
-                              xValueMapper: (GraphData teste, _) => teste.age,
-                              yValueMapper: (GraphData teste, _) => teste.zm1,
-                              color: Color.fromRGBO(255, 255, 0, 1)),
-                          SplineSeries<GraphData, double>(
-                              dataSource: snapshot.data,
-                              xValueMapper: (GraphData teste, _) => teste.age,
-                              yValueMapper: (GraphData teste, _) => teste.z0,
-                              color: Color.fromRGBO(0, 255, 0, 1)),
-                          SplineSeries<GraphData, double>(
-                              dataSource: snapshot.data,
-                              xValueMapper: (GraphData teste, _) => teste.age,
-                              yValueMapper: (GraphData teste, _) => teste.z1,
-                              color: Color.fromRGBO(255, 255, 0, 1)),
-                          SplineSeries<GraphData, double>(
-                              dataSource: snapshot.data,
-                              xValueMapper: (GraphData teste, _) => teste.age,
-                              yValueMapper: (GraphData teste, _) => teste.z2,
-                              color: Color.fromRGBO(255, 0, 0, 1)),
-                          SplineSeries<GraphData, double>(
-                              dataSource: snapshot.data,
-                              xValueMapper: (GraphData teste, _) => teste.age,
-                              yValueMapper: (GraphData teste, _) => teste.zm2,
-                              color: Color.fromRGBO(255, 0, 0, 1)),
-                          SplineSeries<GraphData, double>(
-                              dataSource: snapshot.data,
-                              xValueMapper: (GraphData teste, _) => teste.age,
-                              yValueMapper: (GraphData teste, _) => teste.z3,
-                              color: Color.fromRGBO(0, 0, 255, 1)),
-                          SplineSeries<GraphData, double>(
-                              dataSource: snapshot.data,
-                              xValueMapper: (GraphData teste, _) => teste.age,
-                              yValueMapper: (GraphData teste, _) => teste.zm3,
-                              color: Color.fromRGBO(0, 0, 255, 1)),
-                          SplineSeries<GraphData, double>(
-                              markerSettings: MarkerSettings(isVisible: true),
-                              dataSource: snapshot.data,
-                              xValueMapper: (GraphData teste, _) => teste.age,
-                              yValueMapper: (GraphData teste, _) => teste.kid,
-                              color: Color.fromRGBO(0, 0, 0, 1)),
-                        ],
-                        primaryXAxis: CategoryAxis(),
+                  return Container(
+                    child: SfCartesianChart(
+                      title: ChartTitle(text: titleGrafico),
+                      legend: Legend(
+                        isVisible: true,
+                        position: LegendPosition.bottom,
+                        overflowMode: LegendItemOverflowMode.wrap,
+                        height: "18%",
+                        width: "100%",
                       ),
-                    ],
+                      series: <ChartSeries>[
+                        SplineSeries<GraphData, double>(
+                            name: "Z-Score 3",
+                            dataSource: snapshot.data,
+                            xValueMapper: (GraphData teste, _) => teste.age,
+                            yValueMapper: (GraphData teste, _) => teste.z3,
+                            color: Color.fromRGBO(0, 0, 255, 1)),
+                        SplineSeries<GraphData, double>(
+                            name: "Z-Score 2",
+                            dataSource: snapshot.data,
+                            xValueMapper: (GraphData teste, _) => teste.age,
+                            yValueMapper: (GraphData teste, _) => teste.z2,
+                            color: Color.fromRGBO(255, 0, 0, 1)),
+                        SplineSeries<GraphData, double>(
+                            name: "Z-Score 1",
+                            dataSource: snapshot.data,
+                            xValueMapper: (GraphData teste, _) => teste.age,
+                            yValueMapper: (GraphData teste, _) => teste.z1,
+                            color: Color.fromRGBO(255, 255, 0, 1)),
+                        SplineSeries<GraphData, double>(
+                            name: "Z-Score 0",
+                            dataSource: snapshot.data,
+                            xValueMapper: (GraphData teste, _) => teste.age,
+                            yValueMapper: (GraphData teste, _) => teste.z0,
+                            color: Color.fromRGBO(0, 255, 0, 1)),
+                        SplineSeries<GraphData, double>(
+                            name: "Z-Score -1",
+                            dataSource: snapshot.data,
+                            xValueMapper: (GraphData teste, _) => teste.age,
+                            yValueMapper: (GraphData teste, _) => teste.zm1,
+                            color: Color.fromRGBO(255, 255, 0, 1)),
+                        SplineSeries<GraphData, double>(
+                            name: "Z-Score -2",
+                            dataSource: snapshot.data,
+                            xValueMapper: (GraphData teste, _) => teste.age,
+                            yValueMapper: (GraphData teste, _) => teste.zm2,
+                            color: Color.fromRGBO(255, 0, 0, 1)),
+                        SplineSeries<GraphData, double>(
+                            name: "Z-Score -3",
+                            dataSource: snapshot.data,
+                            xValueMapper: (GraphData teste, _) => teste.age,
+                            yValueMapper: (GraphData teste, _) => teste.zm3,
+                            color: Color.fromRGBO(0, 0, 255, 1)),
+                        SplineSeries<GraphData, double>(
+                            name: "Criança",
+                            markerSettings: MarkerSettings(isVisible: true),
+                            dataSource: snapshot.data,
+                            xValueMapper: (GraphData teste, _) => teste.age,
+                            yValueMapper: (GraphData teste, _) => teste.kid,
+                            color: Color.fromRGBO(0, 0, 0, 1)),
+                      ],
+                      primaryXAxis: CategoryAxis(),
+                    ),
                   );
                 } else if (snapshot.hasError) {}
 

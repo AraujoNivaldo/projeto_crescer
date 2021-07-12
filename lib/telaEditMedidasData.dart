@@ -176,15 +176,21 @@ class _telaEditMedidasData extends State<telaEditMedidasData> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'Data Medição',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    child: Text(
+                      'Data Medição:',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                   ),
                   TextField(
                     readOnly: true,
                     controller: childMedidaDate,
-                    decoration: InputDecoration(hintText: 'Escolha a Data'),
+                    decoration: InputDecoration(
+                        hintText: 'Escolha a Data',
+                        border: OutlineInputBorder()),
                     onTap: () async {
                       List<String> oldDate = medida.measureDate.split('-');
                       DateTime oldDateTime = new DateTime(int.parse(oldDate[0]),
@@ -200,10 +206,14 @@ class _telaEditMedidasData extends State<telaEditMedidasData> {
                       childMedidaDate.text = date.toString().substring(0, 10);
                     },
                   ),
-                  Text(
-                    'Peso (KG)',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    child: Text(
+                      'Peso (KG):',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                   ),
                   TextField(
                     keyboardType: TextInputType.number,
@@ -214,15 +224,19 @@ class _telaEditMedidasData extends State<telaEditMedidasData> {
                     controller: childPeso,
                     textAlign: TextAlign.left,
                     decoration: InputDecoration(
-                      border: InputBorder.none,
+                      border: OutlineInputBorder(),
                       hintText: 'Peso (KG)',
                       hintStyle: TextStyle(color: Colors.grey),
                     ),
                   ),
-                  Text(
-                    'Altura (M)',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    child: Text(
+                      'Altura (M):',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                   ),
                   TextField(
                     keyboardType: TextInputType.number,
@@ -233,24 +247,31 @@ class _telaEditMedidasData extends State<telaEditMedidasData> {
                           RegExp(r"^\d?\.?\d{0,2}"))
                     ],
                     decoration: InputDecoration(
-                      border: InputBorder.none,
+                      border: OutlineInputBorder(),
                       hintText: 'Altura (M)',
                       hintStyle: TextStyle(color: Colors.grey),
                     ),
                   ),
-                  Text(
-                    'Perimetro Cefalico',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    child: Text(
+                      'Perimetro Cefalico:',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                   ),
-                  TextField(
-                    keyboardType: TextInputType.number,
-                    controller: childPerimetro,
-                    textAlign: TextAlign.left,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Perimetro Cefalico',
-                      hintStyle: TextStyle(color: Colors.grey),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      controller: childPerimetro,
+                      textAlign: TextAlign.left,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Perimetro Cefalico',
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
                     ),
                   ),
                   Row(

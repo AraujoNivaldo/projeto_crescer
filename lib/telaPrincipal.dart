@@ -45,6 +45,7 @@ class _telaPrincipal extends State<telaPrincipal> {
     return ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         itemCount: data.length,
         itemBuilder: (context, index) {
           return _tile(data[index].childName, data[index].childBirth,
@@ -62,11 +63,11 @@ class _telaPrincipal extends State<telaPrincipal> {
     CollectionReference listaCriancas =
         FirebaseFirestore.instance.collection('childs');
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("Olá " + Env.loggedUser.name),
       ),
       body: Center(
+          child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -116,7 +117,7 @@ class _telaPrincipal extends State<telaPrincipal> {
                 })
           ],
         ),
-      ),
+      )),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
