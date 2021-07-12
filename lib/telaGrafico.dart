@@ -23,7 +23,7 @@ class _telaGrafico extends State<telaGrafico> {
   Child crianca;
   String medida = '';
   bool isPrematuro = false;
-  String titleGrafico = 'mama aqui oh glub glub';
+  String titleGrafico = '';
 
   _telaGrafico(Child crianca, medida, bool isPrematuro) {
     this.crianca = crianca;
