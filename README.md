@@ -1,16 +1,35 @@
-# tela1
+# Projeto Crescer
 
-A new Flutter project.
+Criado por:
 
-## Getting Started
+Lucas Ribeiro JC3003183
 
-This project is a starting point for a Flutter application.
+Nivaldo Araujo JC3002501
 
-A few resources to get you started if this is your first Flutter project:
+Pedro Vinicius JC3003086
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Projeto da disciplina de Programação para Dispositivos Moveis do Instituto Federal de São Paulo - IFSP Campus Jacareí
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+A aplicação se trata de um controle de crescimento de crianças essas podendo ser:
+  
+    -Prematuras
+  
+    -Portadoras de Sindrome de Down
+  
+    -Saudaveis
+  
+O sistema utiliza banco de dados em nuvem FireBase, usuado para:
+  
+    -Login
+  
+    -Cadastros de usuarios
+  
+    -Cadastros de crianças
+  
+    -Cadastro de medidas das crianças
+  
+    -Armazenagem de valores de referências
+  
+A principal funcionalidade do sistema é gerar gráficos de curvas de crescimento apartir dos dados inseridos pelos usuários.
+
+COPIA NÂO COMEDIA, HUMILDE
