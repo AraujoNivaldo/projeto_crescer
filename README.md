@@ -31,5 +31,3 @@ O sistema utiliza banco de dados em nuvem FireBase, usuado para:
     -Armazenagem de valores de referências
   
 A principal funcionalidade do sistema é gerar gráficos de curvas de crescimento apartir dos dados inseridos pelos usuários.
-
-COPIA NÂO COMEDIA, HUMILDE
